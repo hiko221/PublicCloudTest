@@ -1,0 +1,80 @@
+<mvc:View
+    controllerName="ns.salesorder.controller.SalesOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Page id="page" title="Sales Orders List" showNavButton="false">
+        <content>
+            <Panel id="filterPanel" headerText="Filters" class="sapUiResponsiveMargin" width="auto" expandable="false">
+                <content>
+                    <SearchField id="searchField" 
+                                search="onSearch" 
+                                width="20rem" 
+                                placeholder="Search Sales Orders..."/>
+                </content>
+            </Panel>
+            
+            <Table id="salesOrderTable"
+                   inset="false"
+                   items="{/A_SalesOrder}"
+                   growing="true"
+                   growingThreshold="20"
+                   mode="SingleSelect"
+                   fixedLayout="false">
+                
+                <headerToolbar>
+                    <Toolbar id="tableToolbar">
+                        <Title id="tableTitle" text="Sales Orders" level="H2"/>
+                        <ToolbarSpacer id="toolbarSpacer"/>
+                        <Button id="refreshButton" 
+                                icon="sap-icon://refresh" 
+                                tooltip="Refresh"
+                                press="onRefresh"/>
+                    </Toolbar>
+                </headerToolbar>
+                
+                <columns>
+                    <Column id="colSalesOrder" width="12rem">
+                        <Text id="headerSalesOrder" text="Sales Order"/>
+                    </Column>
+                    <Column id="colCustomer" width="15rem">
+                        <Text id="headerCustomer" text="Customer"/>
+                    </Column>
+                    <Column id="colOrderDate" width="12rem">
+                        <Text id="headerOrderDate" text="Order Date"/>
+                    </Column>
+                    <Column id="colNetAmount" width="10rem">
+                        <Text id="headerNetAmount" text="Net Amount"/>
+                    </Column>
+                    <Column id="colCurrency" width="8rem">
+                        <Text id="headerCurrency" text="Currency"/>
+                    </Column>
+                    <Column id="colStatus" width="10rem">
+                        <Text id="headerStatus" text="Status"/>
+                    </Column>
+                </columns>
+                
+                <items>
+                    <ColumnListItem id="salesOrderListItem" press="onItemPress">
+                        <cells>
+                            <ObjectIdentifier 
+                                title="{SalesOrder}"
+                                text="Order"/>
+                            <Text text="{SoldToParty}" />
+                            <Text text="{SalesOrderDate}"/>
+                            <ObjectNumber 
+                                number="{TotalNetAmount}"
+                                emphasized="false"/>
+                            <Text text="{TransactionCurrency}"/>
+                            <ObjectStatus 
+                                text="{OverallSDDocumentRejectionSts}"
+                                state="None"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

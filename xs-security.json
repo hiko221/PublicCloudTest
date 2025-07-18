@@ -1,4 +1,4 @@
-{a
+{
   "xsappname": "nssalesorder",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
